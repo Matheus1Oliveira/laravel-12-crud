@@ -3,14 +3,14 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Produto;
+use App\Models\Compra;
 use Carbon\Carbon;
 
-class ProdutoSeeder extends Seeder
+class CompraSeeder extends Seeder
 {
     public function run(): void
     {
-        Produto::create([
+        Compra::create([
             'formaPgto'   => 'Cartão de Crédito',
             'dataCompra'  => Carbon::now()->subDays(10),
             'dataRecebto' => Carbon::now()->subDays(5),
@@ -18,15 +18,15 @@ class ProdutoSeeder extends Seeder
             'foto'        => null,
         ]);
 
-        Produto::create([
+        Compra::create([
             'formaPgto'   => 'Boleto Bancário',
             'dataCompra'  => Carbon::now()->subDays(20),
             'dataRecebto' => Carbon::now()->subDays(15),
-            'obs'         => 'Produto recebido com atraso',
+            'obs'         => 'Compra recebido com atraso',
             'foto'        => null,
         ]);
 
-        Produto::create([
+        Compra::create([
             'formaPgto'   => 'PIX',
             'dataCompra'  => Carbon::now()->subDays(3),
             'dataRecebto' => null,

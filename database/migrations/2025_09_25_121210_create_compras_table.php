@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up()
 {
-    Schema::create('produtos', function (Blueprint $table) {
+    Schema::create('compras', function (Blueprint $table) {
         $table->id();
         $table->string('formaPgto');
         $table->date('dataCompra')->nullable();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('produtos');
+        Schema::dropIfExists('compras');
     }
 };
