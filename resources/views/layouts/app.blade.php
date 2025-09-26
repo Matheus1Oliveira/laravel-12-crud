@@ -9,6 +9,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        .navbar .username {
+            max-width: 150px;  /* ajuste conforme seu layout */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
         body {
             display: flex;
             flex-direction: column;
@@ -105,7 +114,7 @@
                                          class="rounded-circle me-2"
                                          style="width:35px; height:35px; object-fit:cover;">
                                 @endif
-                                <span class="d-md-inline">{{ Auth::user()->name }}</span>
+                                <span class="username d-md-inline">{{ Auth::user()->name }}</span>
 
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">

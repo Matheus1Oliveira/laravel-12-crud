@@ -26,7 +26,8 @@
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
                     <input type="text" 
-                           class="form-control @error('name') is-invalid @enderror" 
+                            maxlength="40"
+                           class="form-control @error('name') is-invalid @enderror " 
                            id="name" name="name" value="{{ old('name', $user->name) }}">
                     @error('name')
                         <div class="text-danger small">{{ $message }}</div>

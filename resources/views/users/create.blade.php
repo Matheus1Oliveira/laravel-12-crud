@@ -7,7 +7,7 @@
         @csrf
         <div class="mb-3">
             <label>Nome:</label>
-            <input type="text" name="name" class="form-control" placeholder="Nome">
+            <input type="text" name="name" class="form-control" placeholder="Nome" maxlength="40">
             @error('name') <small class="text-danger">{{ $message }}</small> @enderror
         </div>
         <div class="mb-3">
