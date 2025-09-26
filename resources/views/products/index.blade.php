@@ -41,15 +41,14 @@
                         <td class="text-center">
                             <div class="d-flex justify-content-center gap-2">
                                 {{-- Todos podem ver --}}
-                                <a href="{{ route('products.show', $product->id) }}" 
-                                   class="btn btn-primary text-white w-100">
-                                    <i class="bi bi-eye"></i> Ver
-                                </a>
-
-                                {{-- Apenas logados podem editar/excluir --}}
                                 @auth
+                                    <a href="{{ route('products.show', $product->id) }}" 
+                                    class="btn btn-primary btn-sm">
+                                        <i class="bi bi-eye"></i> Ver
+                                    </a>
+
                                     <a href="{{ route('products.edit', $product->id) }}" 
-                                       class="btn btn-primary btn-sm">
+                                    class="btn btn-warning btn-sm text-white">
                                         <i class="bi bi-pencil-square"></i> Editar
                                     </a>   
 
@@ -61,6 +60,11 @@
                                             <i class="bi bi-trash"></i> Excluir
                                         </button>
                                     </form>
+                                @else
+                                    <a href="{{ route('products.show', $product->id) }}" 
+                                    class="btn btn-primary text-white w-100">
+                                        <i class="bi bi-eye"></i> Ver
+                                    </a>
                                 @endauth
                             </div>
                         </td>

@@ -9,9 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    /**
-     * Verificar se é admin (reutilizado em todos os métodos).
-     */
+    
     private function authorizeAdmin()
     {
         if (!Auth::check()) {

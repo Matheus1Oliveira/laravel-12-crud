@@ -57,28 +57,32 @@
                         <td class="text-center">
                             <div class="d-flex justify-content-center gap-2">
                                 {{-- Todos podem ver --}}
-                                <a href="{{ route('compras.show', $compra->id) }}" 
-                                   class="btn btn-primary text-white w-100">
-                                    <i class="bi bi-eye"></i> Ver
-                                </a>
-
-                                {{-- Somente logados podem editar/excluir --}}
                                 @auth
+                                    <a href="{{ route('compras.show', $compra->id) }}" 
+                                    class="btn btn-sm btn-primary text-white">
+                                        <i class="bi bi-eye"></i> Ver
+                                    </a>
+
                                     <a href="{{ route('compras.edit', $compra->id) }}" 
-                                       class="btn btn-sm btn-warning text-white">
+                                    class="btn btn-sm btn-warning text-white">
                                         <i class="bi bi-pencil-square"></i> Editar
                                     </a>
 
                                     <form action="{{ route('compras.destroy', $compra->id) }}" 
-                                          method="POST" 
-                                          class="d-inline"
-                                          onsubmit="return confirm('Tem certeza que deseja excluir esta compra?');">
+                                        method="POST" 
+                                        class="d-inline"
+                                        onsubmit="return confirm('Tem certeza que deseja excluir esta compra?');">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-sm btn-danger">
                                             <i class="bi bi-trash"></i> Excluir
                                         </button>
                                     </form>
+                                @else
+                                    <a href="{{ route('compras.show', $compra->id) }}" 
+                                    class="btn btn-primary text-white w-100">
+                                        <i class="bi bi-eye"></i> Ver
+                                    </a>
                                 @endauth
                             </div>
                         </td>

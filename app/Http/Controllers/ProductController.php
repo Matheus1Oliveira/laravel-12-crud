@@ -11,14 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    /**
-     * Verifica se o usuário está logado.
-     * Só não bloqueia o index() e show().
-     */
     private function authorizeUser()
     {
         if (!Auth::check()) {
-            return redirect()->route('login')
+            return redirect('/')
                 ->with('error', 'É necessário estar logado para acessar essa página.')
                 ->send();
         }

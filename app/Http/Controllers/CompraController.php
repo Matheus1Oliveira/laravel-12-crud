@@ -9,10 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CompraController extends Controller
 {
-    /**
-     * Verifica se o usuário está logado.
-     * Só não bloqueia o index() e show().
-     */
     private function authorizeUser()
     {
         if (!Auth::check()) {

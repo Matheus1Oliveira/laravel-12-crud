@@ -104,7 +104,8 @@
                                          class="rounded-circle me-2"
                                          style="width:35px; height:35px; object-fit:cover;">
                                 @endif
-                                <span class="d-none d-sm-inline">{{ Auth::user()->name }}</span>
+                                <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
+
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                 <li>
