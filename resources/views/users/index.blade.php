@@ -16,20 +16,20 @@
         <table class="table table-bordered table-striped align-middle">
             <thead class="table-dark">
                 <tr>
-                    <th>#</th>
+                    <th class="text-center">ID</th>
                     <th>Nome</th>
                     <th>Email</th>
-                    <th>Foto</th>
+                    <th class="text-center">Foto</th>
                     <th class="text-center" width="220">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($users as $user)
                 <tr>
-                    <td>{{ ++$i }}</td>
+                    <td class="text-center">{{ ++$i }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>
+                    <td class="text-center">
                         @if($user->foto)
                             <img src="{{ asset('storage/' . $user->foto) }}" 
                                  alt="Foto do usuário" 

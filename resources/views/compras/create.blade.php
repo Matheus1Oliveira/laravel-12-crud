@@ -45,7 +45,7 @@
                     <input type="date" 
                            class="form-control @error('dataCompra') is-invalid @enderror" 
                            id="dataCompra" name="dataCompra" 
-                           value="{{ now()->format('Y-m-d') }}" required>
+                           value="{{ old('dataCompra', now()->format('Y-m-d')) }}" required>
                     @error('dataCompra')
                         <div class="text-danger small">{{ $message }}</div>
                     @enderror
@@ -90,4 +90,19 @@
         </div>
     </div>
 </div>
+
+{{-- Script para garantir que a data de recebimento seja >= data da compra --}}
+<script>
+    const dataCompra = document.getElementById('dataCompra');
+    const dataRecebto = document.getElementById('dataRecebto');
+
+    function ajustarMinimo() {
+        if (dataCompra.value) {
+            dataRecebto.min = dataCompra.value;
+        }
+    }
+
+    dataCompra.addEventListener('change', ajustarMinimo);
+    window.addEventListener('load', ajustarMinimo);
+</script>
 @endsection

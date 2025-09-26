@@ -22,18 +22,18 @@
         <table class="table table-bordered table-striped align-middle">
             <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
+                    <th class="text-center">ID</th>
                     <th>Forma de Pagamento</th>
                     <th>Data da Compra</th>
                     <th>Data de Recebimento</th>
-                    <th>Foto</th>
+                    <th class="text-center">Foto</th>
                     <th class="text-center" width="220">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($compras as $compra)
                     <tr>
-                        <td>{{ $compra->id }}</td>
+                        <td class="text-center">{{ $compra->id }}</td>
                         <td>{{ $compra->formaPgto }}</td>
                         <td>{{ \Carbon\Carbon::parse($compra->dataCompra)->format('d/m/Y') }}</td>
                         <td>
@@ -41,7 +41,7 @@
                                 ? \Carbon\Carbon::parse($compra->dataRecebto)->format('d/m/Y') 
                                 : 'Não recebido' }}
                         </td>
-                        <td>
+                        <td class="text-center">
                             @if($compra->foto)
                                 <img src="{{ asset('storage/' . $compra->foto) }}" 
                                     alt="Foto da compra" 

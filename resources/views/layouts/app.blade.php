@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CRUD</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -104,7 +105,7 @@
                                          class="rounded-circle me-2"
                                          style="width:35px; height:35px; object-fit:cover;">
                                 @endif
-                                <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
+                                <span class="d-md-inline">{{ Auth::user()->name }}</span>
 
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">

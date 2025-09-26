@@ -22,7 +22,7 @@
         <table class="table table-bordered table-striped align-middle">
             <thead class="table-dark">
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col" class="text-center">ID</th>
                     <th scope="col">Código</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Quantidade</th>
@@ -33,7 +33,7 @@
             <tbody>
                 @foreach($products as $product)
                     <tr>
-                        <td>{{ $product->id }}</td>
+                        <td class="text-center">{{ $product->id }}</td>
                         <td>{{ $product->code }}</td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->quantity }}</td>
