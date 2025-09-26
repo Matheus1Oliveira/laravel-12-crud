@@ -4,7 +4,11 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Lista de Produtos</h2>
-        <a href="{{ route('products.create') }}" class="btn btn-success">Novo Produto</a>
+
+        {{-- Somente logados podem criar produtos --}}
+        @auth
+            <a href="{{ route('products.create') }}" class="btn btn-success">Novo Produto</a>
+        @endauth
     </div>
 
     @if(session('success'))
@@ -14,6 +18,7 @@
     @endif
 
     @if($products->count())
+    <div class="table-responsive">
         <table class="table table-bordered table-striped align-middle">
             <thead class="table-dark">
                 <tr>
@@ -34,34 +39,37 @@
                         <td>{{ $product->quantity }}</td>
                         <td>R$ {{ number_format($product->price, 2, ',', '.') }}</td>
                         <td class="text-center">
-                            <form action="{{ route('products.destroy', $product->id) }}" method="post" class="d-inline">
-                                @csrf
-                                @method('DELETE')
+                            <div class="d-flex justify-content-center gap-2">
+                                {{-- Todos podem ver --}}
+                                <a href="{{ route('products.show', $product->id) }}" 
+                                   class="btn btn-primary text-white w-100">
+                                    <i class="bi bi-eye"></i> Ver
+                                </a>
 
-                                <div class="d-flex justify-content-center gap-2">
-                                    <a href="{{ route('products.show', $product->id) }}" 
-                                       class="btn btn-warning btn-sm text-white">
-                                        <i class="bi bi-eye"></i> Ver
-                                    </a>
-
+                                {{-- Apenas logados podem editar/excluir --}}
+                                @auth
                                     <a href="{{ route('products.edit', $product->id) }}" 
                                        class="btn btn-primary btn-sm">
                                         <i class="bi bi-pencil-square"></i> Editar
                                     </a>   
 
-                                    <button type="submit" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Deseja realmente excluir este produto?');">
-                                        <i class="bi bi-trash"></i> Excluir
-                                    </button>
-                                </div>
-                            </form>
+                                    <form action="{{ route('products.destroy', $product->id) }}" method="post" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Deseja realmente excluir este produto?');">
+                                            <i class="bi bi-trash"></i> Excluir
+                                        </button>
+                                    </form>
+                                @endauth
+                            </div>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+    </div>
 
-        <!-- Paginação -->
         <div class="d-flex justify-content-center">
             {{ $products->links() }}
         </div>

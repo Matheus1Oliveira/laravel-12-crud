@@ -4,7 +4,11 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Lista de Compras</h2>
-        <a href="{{ route('compras.create') }}" class="btn btn-success">Nova Compra</a>
+
+        {{-- Somente usuários logados podem criar novas compras --}}
+        @auth
+            <a href="{{ route('compras.create') }}" class="btn btn-success">Nova Compra</a>
+        @endauth
     </div>
 
     @if(session('success'))
@@ -14,6 +18,7 @@
     @endif
 
     @if($compras->count())
+    <div class="table-responsive">
         <table class="table table-bordered table-striped align-middle">
             <thead class="table-dark">
                 <tr>
@@ -39,49 +44,52 @@
                         <td>
                             @if($compra->foto)
                                 <img src="{{ asset('storage/' . $compra->foto) }}" 
-                                     alt="Foto da compra" 
-                                     class="img-thumbnail"
-                                     style="width: 80px; height: 80px; object-fit: cover;">
+                                    alt="Foto da compra" 
+                                    class="img-thumbnail img-fluid"
+                                    style="max-width: 120px; height: auto; object-fit: cover;">
                             @else
                                 <img src="{{ asset('sem-img.png') }}" 
-                                     alt="Sem imagem" 
-                                     class="img-thumbnail"
-                                     style="width: 80px; height: 80px; object-fit: cover;">
+                                    alt="Sem imagem" 
+                                    class="img-thumbnail img-fluid"
+                                    style="max-width: 120px; height: auto; object-fit: cover;">
                             @endif
                         </td>
                         <td class="text-center">
                             <div class="d-flex justify-content-center gap-2">
+                                {{-- Todos podem ver --}}
                                 <a href="{{ route('compras.show', $compra->id) }}" 
-                                   class="btn btn-sm btn-primary">
+                                   class="btn btn-primary text-white w-100">
                                     <i class="bi bi-eye"></i> Ver
                                 </a>
 
-                                <a href="{{ route('compras.edit', $compra->id) }}" 
-                                   class="btn btn-sm btn-warning text-white">
-                                    <i class="bi bi-pencil-square"></i> Editar
-                                </a>
+                                {{-- Somente logados podem editar/excluir --}}
+                                @auth
+                                    <a href="{{ route('compras.edit', $compra->id) }}" 
+                                       class="btn btn-sm btn-warning text-white">
+                                        <i class="bi bi-pencil-square"></i> Editar
+                                    </a>
 
-                                <form action="{{ route('compras.destroy', $compra->id) }}" 
-                                      method="POST" 
-                                      class="d-inline"
-                                      onsubmit="return confirm('Tem certeza que deseja excluir esta compra?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash"></i> Excluir
-                                    </button>
-                                </form>
+                                    <form action="{{ route('compras.destroy', $compra->id) }}" 
+                                          method="POST" 
+                                          class="d-inline"
+                                          onsubmit="return confirm('Tem certeza que deseja excluir esta compra?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="bi bi-trash"></i> Excluir
+                                        </button>
+                                    </form>
+                                @endauth
                             </div>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-
-        <!-- Paginação -->
-        <div class="d-flex justify-content-center">
-            {{ $compras->links() }}
-        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        {{ $compras->links() }}
+    </div>
     @else
         <p class="text-center">Nenhuma compra encontrada.</p>
     @endif

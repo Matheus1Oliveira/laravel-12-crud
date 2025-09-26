@@ -2,69 +2,85 @@
 
 @section('content')
 <div class="container">
-    <h2>Novo produto</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Novo Produto</h2>
+        <a href="{{ route('products.index') }}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </a>
+    </div>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Ops!</strong> Verifique os erros abaixo:<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <strong>Ops!</strong> Verifique os erros abaixo:<br><br>
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('products.store') }}" method="POST">
+                @csrf
+
+                <div class="mb-3">
+                    <label for="code" class="form-label">Código</label>
+                    <input type="text" 
+                           class="form-control @error('code') is-invalid @enderror"
+                           id="code" name="code" value="{{ old('code') }}">
+                    @error('code')
+                        <div class="text-danger small">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="text" 
+                           class="form-control @error('name') is-invalid @enderror"
+                           id="name" name="name" value="{{ old('name') }}">
+                    @error('name')
+                        <div class="text-danger small">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantidade</label>
+                    <input type="number" 
+                           class="form-control @error('quantity') is-invalid @enderror"
+                           id="quantity" name="quantity" value="{{ old('quantity') }}">
+                    @error('quantity')
+                        <div class="text-danger small">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="price" class="form-label">Preço</label>
+                    <input type="number" step="0.01" 
+                           class="form-control @error('price') is-invalid @enderror"
+                           id="price" name="price" value="{{ old('price') }}">
+                    @error('price')
+                        <div class="text-danger small">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descrição</label>
+                    <textarea class="form-control @error('description') is-invalid @enderror"
+                              id="description" name="description">{{ old('description') }}</textarea>
+                    @error('description')
+                        <div class="text-danger small">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Salvar
+                    </button>
+                </div>
+            </form>
         </div>
-    @endif
-
-    <form action="{{ route('products.store') }}" method="post">
-         @csrf
-
-        <div class="mb-3">
-            <label for="code">Código</label>
-            <input type="text" class="form-control @error('code') is-invalid @enderror"
-                id="code" name="code" value="{{ old('code') }}">
-            @error('code')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div class="mb-3">
-            <label for="name">Nome</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror"
-                id="name" name="name" value="{{ old('name') }}">
-            @error('name')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div class="mb-3">
-            <label for="quantity">Quantidade</label>
-            <input type="number" class="form-control @error('quantity') is-invalid @enderror"
-                id="quantity" name="quantity" value="{{ old('quantity') }}">
-            @error('quantity')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div class="mb-3">
-            <label for="price">Preço</label>
-            <input type="number" step="0.01" class="form-control @error('price') is-invalid @enderror"
-                id="price" name="price" value="{{ old('price') }}">
-            @error('price')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div class="mb-3">
-            <label for="description">Descrição</label>
-            <textarea class="form-control @error('description') is-invalid @enderror"
-                    id="description" name="description">{{ old('description') }}</textarea>
-            @error('description')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-                  
-        <button type="submit" class="btn btn-primary">Salvar</button>
-        <a href="{{ route('products.index') }}" class="btn btn-secondary">Voltar</a>
-    </form>
+    </div>
 </div>
 @endsection
